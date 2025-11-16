@@ -133,27 +133,85 @@ Análise de Desempenho
 
 
 if __name__ == "__main__":
-    capacidade = 10
-    projetos = [
+
+    projetos_base = [
         ("A", 12, 4),
         ("B", 10, 3),
         ("C", 7, 2),
         ("D", 4, 3),
     ]
 
-    print("=== GREEDY ===")
-    valor, horas, escolhidos = abordagem_gulosa(projetos, capacidade)
-    print("Valor:", valor, "| Horas usadas:", horas, "| Projetos:", escolhidos)
+    projetos_bug = [
+        ("A", 60, 10),
+        ("B", 100, 20)
+    ]
 
-    print("\n=== RECURSIVA PURA ===")
-    melhor_valor = mochila_recursiva(projetos, capacidade, len(projetos) - 1)
-    print("Melhor valor:", melhor_valor)
+    print("\n======================")
+    print("     TESTES GREEDY     ")
+    print("======================")
 
-    print("\n=== MEMOIZAÇÃO ===")
-    memo = {}
-    melhor_valor = mochila_memo(projetos, capacidade, len(projetos) - 1, memo)
-    print("Melhor valor:", melhor_valor, "| Subproblemas armazenados:", len(memo))
+    print("\n[Greedy] Caso 1 (capacidade pequena):")
+    print(abordagem_gulosa(projetos_base, 3))
 
-    print("\n=== BOTTOM-UP (PD Iterativa) ===")
-    melhor_valor, tabela = mochila_bottom_up(projetos, capacidade)
-    print("Melhor valor:", melhor_valor)
+    print("\n[Greedy] Caso 2 (capacidade exata):")
+    print(abordagem_gulosa(projetos_base, 7))
+
+    print("\n[Greedy] Caso 3 (capacidade grande):")
+    print(abordagem_gulosa(projetos_base, 20))
+
+    print("\n[Greedy] Caso 4:")
+    print(abordagem_gulosa(projetos_bug, 20))
+
+
+
+    print("\n======================")
+    print("   TESTES RECURSIVA    ")
+    print("======================")
+
+    print("\n[Recursiva] Caso 1:")
+    print(mochila_recursiva(projetos_base, 3, len(projetos_base) - 1))
+
+    print("\n[Recursiva] Caso 2:")
+    print(mochila_recursiva(projetos_base, 7, len(projetos_base) - 1))
+
+    print("\n[Recursiva] Caso 3:")
+    print(mochila_recursiva(projetos_base, 20, len(projetos_base) - 1))
+
+    print("\n[Recursiva] Caso 4:")
+    print(mochila_recursiva(projetos_bug, 20, len(projetos_bug) - 1))
+
+
+
+    print("\n======================")
+    print("   TESTES MEMOIZAÇÃO   ")
+    print("======================")
+
+    print("\n[Memo] Caso 1:")
+    print(mochila_memo(projetos_base, 3, len(projetos_base) - 1, {}))
+
+    print("\n[Memo] Caso 2:")
+    print(mochila_memo(projetos_base, 7, len(projetos_base) - 1, {}))
+
+    print("\n[Memo] Caso 3:")
+    print(mochila_memo(projetos_base, 20, len(projetos_base) - 1, {}))
+
+    print("\n[Memo] Caso 4:")
+    print(mochila_memo(projetos_bug, 20, len(projetos_bug) - 1, {}))
+
+
+
+    print("\n======================")
+    print("  TESTES BOTTOM-UP     ")
+    print("======================")
+
+    print("\n[Bottom-Up] Caso 1:")
+    print(mochila_bottom_up(projetos_base, 3)[0])
+
+    print("\n[Bottom-Up] Caso 2:")
+    print(mochila_bottom_up(projetos_base, 7)[0])
+
+    print("\n[Bottom-Up] Caso 3:")
+    print(mochila_bottom_up(projetos_base, 20)[0])
+
+    print("\n[Bottom-Up] Caso 4:")
+    print(mochila_bottom_up(projetos_bug, 20)[0])
